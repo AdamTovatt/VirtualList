@@ -1,6 +1,6 @@
 class Api {
     constructor() {
-        this.basePath = "https://lucidchat.herokuapp.com/";
+        this.basePath = "https://warm-plateau-84344.herokuapp.com/";
     }
 
     async GetResponse(method, url, data = null) {
