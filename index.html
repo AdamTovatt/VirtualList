@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <script type="text/javascript" src="Api.js"></script>
+    <script type="text/javascript" src="Chat.js"></script>
+    <script type="text/javascript" src="ButtonFunctions.js"></script>
+    <script type="text/javascript" src="Cookies.js"></script>
+    <link rel="stylesheet" href="Styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body>
+    <div id="Screen_CreateUser" class="Screen">
+        <div class="UsernameBox">
+            <input id="UsernameInput" type="input" class="UsernameInput" placeholder="Namn" />
+            <button class="Button" onclick="SubmitName()">OK</button>
+        </div>
+    </div>
+    <div id="Screen_Chat" class="Screen">
+        <div id="TabButtons" class="Tab">
+            <button class="TabButton" style="font-weight: 600" onclick="OpenUsersTab()" id="UserListButton">Användare</button>
+        </div>
+
+        <div id="UserList" class="TabContent">
+            <table class="UserList"></table>
+        </div>
+
+        <div id="ChatInputArea" class="ChatInputArea">
+            <div class="ChatTextInputContainer">
+                <table class="ChatTextInputTable">
+                    <tr>
+                        <td><textarea id="ChatTextInput" type="text" class="ChatTextInput" placeholder="..." oninput="UserTyped()"></textarea></td>
+                        <td><button class="SendButton" onclick="SendChat()">Skicka</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
