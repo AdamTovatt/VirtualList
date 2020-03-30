@@ -2,21 +2,35 @@ class Api {
     constructor() {
         this.basePath = "https://warm-plateau-84344.herokuapp.com/";
         this.loginNeeded = new Event("loginNeeded");
-        this.token = getCookie("token");;
-        this.refreshToken = getCookie("refreshToken");;
+        this.token = getCookie("token");
+        this.refreshToken = getCookie("refreshToken");
     }
 
     async GetIsAuthorized() {
-        if (this.token) {
-            console.log("token valid: " + (await this.ValidateToken()).message);
+        try {
+            if (this.token) {
+                if ((await this.ValidateToken()).message) {
+                    return true;
+                }
+                else {
+                    console.log("Refresh token has been used");
+                    console.log(await this.UseRefreshToken());
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
         }
-        else {
+        catch (error) {
+            console.log(error);
             return false;
         }
     }
 
     async GetResponse(method, url, data = null) {
         var requestUrl = this.basePath + url;
+        var token = this.token;
         return new Promise(function (resolve, reject) {
             let xhr = new XMLHttpRequest();
             xhr.open(method, requestUrl);
@@ -29,11 +43,11 @@ class Api {
                     statusText: xhr.statusText
                 });
             };
+            if (token) {
+                xhr.setRequestHeader("Authorization", "bearer " + token);
+            }
             if (data != null) {
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                if (this.token) {
-                    xhr.setRequestHeader("Authorization", "bearer " + this.token);
-                }
                 xhr.send(JSON.stringify(data));
             }
             else {
@@ -44,12 +58,17 @@ class Api {
 
     async GetUserLists() {
         var path = "user/lists";
-        return await this.GetResponse("GET", path);
+        return JSON.parse(await this.GetResponse("GET", path));
     }
 
     async ValidateToken() {
         var path = "token/validate";
         return JSON.parse(await this.GetResponse("GET", path));
+    }
+
+    async UseRefreshToken() {
+        var path = "user/token/refresh";
+        return JSON.parse(await this.GetResponse("POST", path, { refreshToken: this.refreshToken }));
     }
 
     async Login(emailOrUsername, password) {
