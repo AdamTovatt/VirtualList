@@ -1,6 +1,18 @@
 class Api {
     constructor() {
         this.basePath = "https://warm-plateau-84344.herokuapp.com/";
+        this.loginNeeded = new Event("loginNeeded");
+        this.token = getCookie("token");;
+        this.refreshToken = getCookie("refreshToken");;
+    }
+
+    async GetIsAuthorized() {
+        if (this.token) {
+            console.log("token valid: " + (await this.ValidateToken()).message);
+        }
+        else {
+            return false;
+        }
     }
 
     async GetResponse(method, url, data = null) {
@@ -19,6 +31,9 @@ class Api {
             };
             if (data != null) {
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                if (this.token) {
+                    xhr.setRequestHeader("Authorization", "bearer " + this.token);
+                }
                 xhr.send(JSON.stringify(data));
             }
             else {
@@ -27,53 +42,27 @@ class Api {
         });
     }
 
-    async CleanDatabase() {
-        var path = "database/clean";
-        return await this.GetResponse("POST", path);
-    }
-
-    async CreateChat(alphaId, betaId) {
-        var path = "chat/create";
-        return await this.GetResponse("POST", path, { alphaId, betaId });
-    }
-
-    async UserTyping(chatId, userId) {
-        var path = "chat/usertyping";
-        return await this.GetResponse("POST", path, { chatId, userId });
-    }
-
-    async SendMessage(chatId, userId, message) {
-        var path = "chat/sendMessage";
-        return await this.GetResponse("POST", path, { chatId, userId, message });
-    }
-
-    async GetChat(chatId) {
-        var path = "chat/get?id=" + chatId;
+    async GetUserLists() {
+        var path = "user/lists";
         return await this.GetResponse("GET", path);
     }
 
-    async GetUserChats(userId) {
-        var path = "users/chats?userId=" + userId;
-        return await this.GetResponse("GET", path);
+    async ValidateToken() {
+        var path = "token/validate";
+        return JSON.parse(await this.GetResponse("GET", path));
     }
 
-    async CreateUser(username) {
-        var path = "users/create";
-        return await this.GetResponse("POST", path, { username });
-    }
+    async Login(emailOrUsername, password) {
+        var data = null;
 
-    async UserHeartBeat(userId) {
-        var path = "users/heartbeat";
-        return await this.GetResponse("POST", path, { userId });
-    }
+        if (emailOrUsername.includes("@")) {
+            data = { email: emailOrUsername, username: "", password: password };
+        }
+        else {
+            data = { email: "", username: emailOrUsername, password: password };
+        }
 
-    async GetUsers() {
-        var path = "users/get";
-        return await this.GetResponse("GET", path);
-    }
-
-    async GetUserInfo(id) {
-        var path = "users/getuser?id=" + id;
-        return await this.GetResponse("GET", path);
+        var path = "user/token";
+        return JSON.parse(await this.GetResponse("POST", path, data))
     }
 }

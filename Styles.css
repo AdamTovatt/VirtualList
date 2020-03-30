@@ -1,5 +1,5 @@
 html {
-    background-color: var(--bright);
+    background-color: var(--blue-light);
 }
 
 body {
@@ -9,79 +9,18 @@ body {
     font-size: 14px;
 }
 
-.Screen {
-    display: none;
+.Center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 
-.OwnMessage {
-    float: right;
-    background-color: var(--pink-light);
-    padding: 10px;
-    border-radius: 4px;
-    color: var(--black);
-}
-
-.OtherMessage {
-    float: left;
-    background-color: var(--gray-light);
-    padding: 10px;
-    border-radius: 4px;
-    color: var(--black);
-}
-
-.ChatTable {
-    width: 100%;
-}
-
-.UsernameBox {
-    margin-top: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    min-height: 50px;
-    min-width: 100px;
-    padding: 30px;
-    width: 50%;
-    background-color: var(--darker);
-    text-align: center;
-    border-radius: 10px;
-}
-
-.UsernameInput {
-    width: 100%;
-    padding: 20px 0px;
-    display: inline-block;
-    border: 0px solid var(--pink);
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: var(--black);
-    margin-left: auto;
-    margin-right: auto;
-    font-family: Rubik;
-    background-color: var(--white);
-    text-align: center;
-    font-size: 1.2em;
-}
-
-.ChatInputArea {
-    display: none;
-    position: fixed;
-    width: 100%;
-    background-color: var(--darker);
-    padding: 10px;
-    bottom: 0;
-    z-index: 10;
-}
-
-.ChatTextInputContainer {
-    /*padding-right: 100px;*/
-    margin-right: 20px;
-}
-
-.ChatTextInputTable {
-    width: 100%;
-}
-
-.ChatTextInput {
+.TextInput {
     max-width: 100%;
     width: 100%;
     height: 5em;
@@ -98,141 +37,41 @@ body {
     resize: none;
 }
 
-.SendButton {
-    width: 100%;
-    height: 4.58em;
-    padding: 5px 5px;
-    display: inline-block;
-    border-radius: 4px;
-    font-family: Rubik;
-    color: var(--black);
-    border: 0px solid black;
-    background-color: var(--pink);
-    font-size: 1.3em;
-    margin-left: 5px;
-}
-
-    .SendButton:hover {
-        background-color: var(--pink-light);
-    }
-
-    .SendButton:active {
-        background-color: var(--red);
-    }
-
-input[type=text], select {
-    width: 100%;
-    padding: 20px 10px;
-    display: inline-block;
-    border: 0px solid var(--pink);
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: var(--black);
-    margin-left: auto;
-    margin-right: auto;
-    font-family: Rubik;
-    background-color: var(--white);
-    text-align: left;
-    font-size: 1.2em;
-}
-
 .Button {
     width: 100%;
     padding: 20px 20px;
-    display: inline-block;
+    display: block;
     border-radius: 4px;
-    font-family: Rubik;
-    color: var(--black);
+    font-family: inherit;
+    color: var(--blue-light);
     border: 0px solid black;
-    background-color: var(--pink);
+    background-color: var(--blue-mid);
     font-size: 1.3em;
     margin-top: 10px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
     .Button:hover {
-        background-color: var(--pink-light);
+        background-color: var(--blue-mid-light);
     }
 
     .Button:active {
-        background-color: var(--red);
+        background-color: var(--blue-mid-light);
     }
-
-.Tab {
-    position: fixed;
-    overflow: auto;
-    white-space: nowrap;
-    border: 0px solid var(--bright);
-    background-color: var(--darker);
-    color: var(--black);
-    width: 100%;
-}
-
-.TabButton {
-    background-color: inherit;
-    border: 0px solid black;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 1.2em;
-    font-family: inherit;
-    color: var(--black);
-}
-
-    .TabButton:hover {
-        background-color: var(--bright);
-    }
-
-    .TabButton:active {
-        background-color: var(--bright);
-    }
-
-.ActiveTabButton {
-    background-color: var(--bright);
-    border: 0px solid black;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 1.2em;
-    font-family: inherit;
-    color: var(--black);
-}
-
-    .ActiveTabButton:hover {
-        background-color: var(--bright);
-    }
-
-    .ActiveTabButton:active {
-        background-color: var(--bright);
-    }
-
-.TabContent {
-    display: none;
-    padding: 60px 10px;
-    border: 0px solid #ccc;
-    border-top: none;
-    animation: fadeIn 0.3s;
-}
-
-.UserList {
-    border: 0px solid black;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 800px;
-}
 
 :root {
-    --white: #f5f4ef;
-    --bright: #EAE7DC;
-    --darker: #D8C3A5;
-    --black: #41403e;
-    --gray: #8E8D8A;
-    --gray-light: #b4b3b1;
-    --pink: #E98074;
-    --pink-light: #ea8b80;
-    --red: #E85A4F;
+    --white: #eef4ed;
+    --yellow: #f8e9a1;
+    --red: #f76c6c;
+    --blue-light: #a8d0e6;
+    --blue-mid: #374785;
+    --blue-mid-light: #40539e;
+    --blue-dark: #24305e;
+    --gray-mid: #5f6670;
+    --gray-light: #9ea5af;
+    --gray-dark: #1d1f21;
 }
 
 @keyframes scaleUp {
@@ -349,57 +188,16 @@ input[type=text], select {
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-.lds-grid {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin-top: 10px;
-    animation: fadeIn 1s linear forwards;
-    animation-fill-mode: forwards;
+@font-face {
+    font-family: "DejaVuSans";
+    src: url("Fonts/DejaVuSans.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 500;
 }
 
-.lds-grid-hidden {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin-top: 10px;
-}
-
-    .lds-grid div {
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: var(--gray-light);
-        animation: lds-grid 1.2s linear infinite;
-    }
-
-        .lds-grid div:nth-child(1) {
-            top: 8px;
-            left: 8px;
-            animation-delay: 0s;
-        }
-
-        .lds-grid div:nth-child(2) {
-            top: 8px;
-            left: 30px;
-            animation-delay: -0.4s;
-        }
-
-        .lds-grid div:nth-child(3) {
-            top: 8px;
-            left: 52px;
-            animation-delay: -0.8s;
-        }
-
-@keyframes lds-grid {
-    0%, 100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
+@font-face {
+    font-family: "DejaVuSans";
+    src: url("Fonts/DejaVuSans-Bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 700;
 }

@@ -11,30 +11,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 </head>
 <body>
-    <div id="Screen_CreateUser" class="Screen">
-        <div class="UsernameBox">
-            <input id="UsernameInput" type="input" class="UsernameInput" placeholder="Namn" />
-            <button class="Button" onclick="SubmitName()">OK</button>
-        </div>
-    </div>
-    <div id="Screen_Chat" class="Screen">
-        <div id="TabButtons" class="Tab">
-            <button class="TabButton" style="font-weight: 600" onclick="OpenUsersTab()" id="UserListButton">Användare</button>
-        </div>
-
-        <div id="UserList" class="TabContent">
-            <table class="UserList"></table>
-        </div>
-
-        <div id="ChatInputArea" class="ChatInputArea">
-            <div class="ChatTextInputContainer">
-                <table class="ChatTextInputTable">
-                    <tr>
-                        <td><textarea id="ChatTextInput" type="text" class="ChatTextInput" placeholder="..." oninput="UserTyped()"></textarea></td>
-                        <td><button class="SendButton" onclick="SendChat()">Skicka</button></td>
-                    </tr>
-                </table>
-            </div>
+    <div class="Screen" id="Screen_Start">
+        <div class="Center">
+            <button class="Button" onclick="ShowLogin()">login</button>
+            <button class="Button" onclick="ShowCreateAccount()">create account</button>
         </div>
     </div>
 </body>
