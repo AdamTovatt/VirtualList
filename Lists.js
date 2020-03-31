@@ -13,6 +13,15 @@ window.onload = async function () {
     screen_UserStartPage = document.getElementById("Screen_UserStartPage");
     screen_Loading = document.getElementById("Screen_Loading");
 
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            if (screen_Login.style.display == "block") {
+                event.preventDefault();
+                LoginButton();
+            }
+        }
+    }); 
+
     api = new Api();
 
     if (await api.GetIsAuthorized()) {
