@@ -4,12 +4,14 @@ var screen_Start = null;
 var screen_Login = null;
 var screen_Register = null;
 var screen_UserStartPage = null;
+var screen_Loading = null;
 
 window.onload = async function () {
     screen_Start = document.getElementById("Screen_Start");
     screen_Login = document.getElementById("Screen_Login");
     screen_Register = document.getElementById("Screen_Register");
     screen_UserStartPage = document.getElementById("Screen_UserStartPage");
+    screen_Loading = document.getElementById("Screen_Loading");
 
     api = new Api();
 
@@ -21,14 +23,21 @@ window.onload = async function () {
     }
 }
 
-function HideAllScreens() {
+function HideAllScreens(showLoading) {
     screen_Start.style.display = "none";
     screen_Login.style.display = "none";
     screen_Register.style.display = "none";
+    if (showLoading) {
+        screen_Loading.style.display = "block";
+    }
+}
+
+function HideLoading() {
+    screen_Loading.style.display = "none";
 }
 
 async function GoToUserPage() {
-    HideAllScreens();
+    HideAllScreens(true);
 
     screen_UserStartPage.style.display = "block";
 
@@ -48,6 +57,7 @@ async function GoToUserPage() {
         }
 
         document.getElementById("UserListsContainer").appendChild(listTable);
+        HideLoading();
     }
     else {
         alert("Fel när listor skulle laddas");

@@ -1,7 +1,6 @@
 class Api {
     constructor() {
         this.basePath = "https://warm-plateau-84344.herokuapp.com/";
-        this.loginNeeded = new Event("loginNeeded");
         this.token = getCookie("token");
         this.refreshToken = getCookie("refreshToken");
     }
