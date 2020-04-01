@@ -94,15 +94,17 @@ async function GoToListPage(listId) {
 
         var listItems = response.message;
 
+        itemTable.insertRow(-1).insertCell(-1).innerHTML = '<button class="ButtonAddListItem">+</button>';
+
         for (var i = 0; i < listItems.length; i++) { //icke raderade
                 var itemName = listItems[i].itemName;
                 var itemDescription = listItems[i].description;
 
             var row = itemTable.insertRow(-1);
             if(!listItems[i].deleted)
-                row.insertCell(-1).innerHTML = '<div class="ItemBox"><div class="ItemHeadline">' + itemName + '</div><div class="ItemDescription">' + itemDescription + '</div></div>'
+                row.insertCell(-1).innerHTML = '<div class="ItemBox"><button class="XButton" onClick="DeleteListItem(\'' + listItems[i].itemId + '\')"> </button><div class="ItemHeadline">' + itemName + '</div><div class="ItemDescription">' + itemDescription + '</div></div>'
             else
-                row.insertCell(-1).innerHTML = '<div class="ItemBox ItemDeleted"><div class="ItemHeadline ItemDeleted">' + itemName + '</div><div class="ItemDescription ItemDeleted">' + itemDescription + '</div></div>'
+                row.insertCell(-1).innerHTML = '<div class="ItemBox ItemDeleted"><button class="XButton" onClick="DeleteListItem(\'' + listItems[i].itemId + '\')">✓</button><div class="ItemHeadline ItemDeleted">' + itemName + '</div><div class="ItemDescription ItemDeleted">' + itemDescription + '</div></div>'
         }
 
         var container = document.getElementById("ListItemContainer");
