@@ -5,6 +5,7 @@ var screen_Login = null;
 var screen_Register = null;
 var screen_UserStartPage = null;
 var screen_Loading = null;
+var screen_ListPage = null;
 
 window.onload = async function () {
     screen_Start = document.getElementById("Screen_Start");
@@ -12,6 +13,9 @@ window.onload = async function () {
     screen_Register = document.getElementById("Screen_Register");
     screen_UserStartPage = document.getElementById("Screen_UserStartPage");
     screen_Loading = document.getElementById("Screen_Loading");
+    screen_ListPage = document.getElementById("Screen_ListPage");
+
+    screen_Loading.style.display = "block";
 
     this.document.getElementById("LoginButton").addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
@@ -36,6 +40,9 @@ function HideAllScreens(showLoading) {
     screen_Start.style.display = "none";
     screen_Login.style.display = "none";
     screen_Register.style.display = "none";
+    screen_UserStartPage.style.display = "none";
+    screen_ListPage.style.display = "none";
+
     if (showLoading) {
         screen_Loading.style.display = "block";
     }
@@ -62,13 +69,53 @@ async function GoToUserPage() {
 
         for (var i = 0; i < lists.length; i++) {
             var row = listTable.insertRow(-1);
-            row.insertCell(-1).innerHTML = '<button class="Button" onclick="OpenNewChat(\'' + "[name]" + '\', \'' + "[id]" + '\')">' + lists[i].listname + '</button>'
+            row.insertCell(-1).innerHTML = '<button class="Button" onclick="OpenList(\'' + lists[i].listid + '\')">' + lists[i].listname + '</button>'
         }
 
+        document.getElementById("UserListsContainer").innerHTML = "";
         document.getElementById("UserListsContainer").appendChild(listTable);
         HideLoading();
     }
     else {
-        alert("Fel när listor skulle laddas");
+        alert("Fel när listor skulle laddas: " + response.message);
+    }
+}
+
+async function GoToListPage(listId) {
+    HideAllScreens(true);
+
+    screen_ListPage.style.display = "block";
+
+    var response = await api.GetListContent(listId);
+
+    if (response.success) {
+        var itemTable = document.createElement("table");
+        itemTable.className = "ItemTable";
+
+        var listItems = response.message;
+
+        for (var i = 0; i < listItems.length; i++) { //icke raderade
+                var itemName = listItems[i].itemName;
+                var itemDescription = listItems[i].description;
+
+            var row = itemTable.insertRow(-1);
+            if(!listItems[i].deleted)
+                row.insertCell(-1).innerHTML = '<div class="ItemBox"><div class="ItemHeadline">' + itemName + '</div><div class="ItemDescription">' + itemDescription + '</div></div>'
+            else
+                row.insertCell(-1).innerHTML = '<div class="ItemBox ItemDeleted"><div class="ItemHeadline ItemDeleted">' + itemName + '</div><div class="ItemDescription ItemDeleted">' + itemDescription + '</div></div>'
+        }
+
+        var container = document.getElementById("ListItemContainer");
+        container.innerHTML = "";
+
+        container.appendChild(itemTable);
+
+        HideLoading();
+    }
+    else {
+        alert("Fel när lista skulle laddas: " + response.message);
+
+        HideLoading();
+        screen_UserStartPage.style.display = "block";
     }
 }

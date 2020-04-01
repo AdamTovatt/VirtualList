@@ -27,3 +27,11 @@ async function LogoutButton() {
     setCookie("refreshToken", "");
     location.reload();
 }
+
+async function GoToStartPage() {
+    GoToUserPage();
+}
+
+async function OpenList(listId) {
+    GoToListPage(listId);
+}

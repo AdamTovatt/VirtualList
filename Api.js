@@ -60,6 +60,11 @@ class Api {
         return JSON.parse(await this.GetResponse("GET", path));
     }
 
+    async GetListContent(listId) {
+        var path = "listitems?listId=" + listId;
+        return JSON.parse(await this.GetResponse("GET", path));
+    }
+
     async ValidateToken() {
         var path = "token/validate";
         return JSON.parse(await this.GetResponse("GET", path));
