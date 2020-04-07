@@ -19,14 +19,19 @@
     </div>
     <div class="Screen" id="Screen_Login">
         <div class="Center">
-            <textarea id="UsernameInput" type="text" class="TextInput" style="text-align:center" placeholder="username/email" oninput="UserTyped()" spellcheck="false"></textarea>
+            <textarea id="UsernameInput" type="text" class="TextInput" style="text-align:center" placeholder="username/email" spellcheck="false"></textarea>
             <input id="PasswordInput" type="password" class="TextInput" style="text-align:center" placeholder="password" />
             <button class="Button" id="LoginButton" onclick="LoginButton()">login</button>
         </div>
     </div>
     <div class="Screen" id="Screen_Register">
         <div class="Center">
-
+            <textarea id="Register_EmailInput" type="text" class="TextInput" style="text-align:center" placeholder="email" spellcheck="false"></textarea>
+            <textarea id="Register_UsernameInput" type="text" class="TextInput" onfocusout="SetDisplayName()" style="text-align:center" placeholder="username" spellcheck="false"></textarea>
+            <textarea id="Register_DisplayNameInput" type="text" class="TextInput" style="text-align:center" placeholder="display name" spellcheck="false"></textarea>
+            <input id="Register_PasswordInput1" type="password" class="TextInput" style="text-align:center" placeholder="password" />
+            <input id="Register_PasswordInput2" type="password" class="TextInput" style="text-align:center" placeholder="repeat password" />
+            <button class="Button" id="LoginButton" onclick="CreateAccountButton()">create account</button>
         </div>
     </div>
     <div class="Screen" id="Screen_UserStartPage">
@@ -36,7 +41,23 @@
     </div>
     <div class="Screen" id="Screen_ListPage">
         <button class="Button CornerButton" onclick="GoToStartPage()">back</button>
+        <button class="Button CornerButton RightCorner" onclick="GoToStartPage()">share</button>
         <div class="MarginTop" id="ListItemContainer">
+        </div>
+    </div>
+    <div class="Screen" id="Screen_AddItemPage">
+        <button class="Button CornerButton" onclick="GoToLastListPage()">cancel</button>
+        <div class="MarginTop" id="ListItemContainer">
+            <textarea id="ItemHeadlineInput" type="text" class="TextInput" style="text-align:center" placeholder="item headline" spellcheck="false"></textarea>
+            <textarea id="ItemDescriptionInput" type="text" class="TextInput" style="text-align:center; height: 15em" placeholder="item description" spellcheck="false"></textarea>
+            <button class="Button" id="SaveItemButton" style="max-width: 18em; margin-top: 1.2em" onclick="AddItemToList()">add</button>
+        </div>
+    </div>
+    <div class="Screen" id="Screen_SharePage">
+        <button class="Button CornerButton" onclick="GoToLastListPage()">cancel</button>
+        <div class="MarginTop" id="ListItemContainer">
+            <textarea id="ShareUsernameInput" type="text" class="TextInput" style="text-align:center" placeholder="username to add" spellcheck="false"></textarea>
+            <button class="Button" id="SaveItemButton" style="max-width: 18em; margin-top: 1.2em" onclick="AddUserCollaborator()">add collaborator</button>
         </div>
     </div>
     <div class="Screen" id="Screen_Loading">

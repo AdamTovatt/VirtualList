@@ -75,6 +75,16 @@ class Api {
         return JSON.parse(await this.GetResponse("POST", path, { refreshToken: this.refreshToken }));
     }
 
+    async DeleteListItem(listId, itemId) {
+        var path = "listitems?listId=" + listId + "&itemId=" + itemId;
+        return JSON.parse(await this.GetResponse("DELETE", path));
+    }
+
+    async AddListItem(listId, itemName, itemDescription) {
+        var path = "listitems";
+        return JSON.parse(await this.GetResponse("POST", path, { listId: listId, itemName: itemName, itemDescription: itemDescription }));
+    }
+
     async Login(emailOrUsername, password) {
         var data = null;
 
@@ -87,5 +97,12 @@ class Api {
 
         var path = "user/token";
         return JSON.parse(await this.GetResponse("POST", path, data))
+    }
+
+    async CreateUser(email, username, displayName, password) {
+        var path = "user/create";
+        var data = { email: email, username: username, displayName: displayName, password: password };
+
+        return JSON.parse(await this.GetResponse("POST", path, data));
     }
 }

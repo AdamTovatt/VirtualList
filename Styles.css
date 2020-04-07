@@ -78,13 +78,14 @@ body {
 .ButtonAddListItem {
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
+    width: 2em;
     height: 1em;
     font-size: 2em;
     font-weight: 900;
     border: none;
     background-color: transparent;
     color: var(--white);
+    padding-bottom: 5px;
 }
 
 .TextInput {
@@ -157,6 +158,11 @@ body {
     padding: 5px 5px;
     font-size: 90%;
     background-color: var(--blue-dark)
+}
+
+.RightCorner {
+    left: unset;
+    right: 10px;
 }
 
 :root {

@@ -6,6 +6,9 @@ var screen_Register = null;
 var screen_UserStartPage = null;
 var screen_Loading = null;
 var screen_ListPage = null;
+var screen_AddItemPage = null;
+
+var currentList = null;
 
 window.onload = async function () {
     screen_Start = document.getElementById("Screen_Start");
@@ -14,6 +17,7 @@ window.onload = async function () {
     screen_UserStartPage = document.getElementById("Screen_UserStartPage");
     screen_Loading = document.getElementById("Screen_Loading");
     screen_ListPage = document.getElementById("Screen_ListPage");
+    screen_AddItemPage = document.getElementById("Screen_AddItemPage");
 
     screen_Loading.style.display = "block";
 
@@ -33,6 +37,7 @@ window.onload = async function () {
     }
     else {
         screen_Start.style.display = "block";
+        HideLoading();
     }
 }
 
@@ -42,6 +47,7 @@ function HideAllScreens(showLoading) {
     screen_Register.style.display = "none";
     screen_UserStartPage.style.display = "none";
     screen_ListPage.style.display = "none";
+    screen_AddItemPage.style.display = "none";
 
     if (showLoading) {
         screen_Loading.style.display = "block";
@@ -84,6 +90,8 @@ async function GoToUserPage() {
 async function GoToListPage(listId) {
     HideAllScreens(true);
 
+    currentList = listId;
+
     screen_ListPage.style.display = "block";
 
     var response = await api.GetListContent(listId);
@@ -94,7 +102,7 @@ async function GoToListPage(listId) {
 
         var listItems = response.message;
 
-        itemTable.insertRow(-1).insertCell(-1).innerHTML = '<button class="ButtonAddListItem">+</button>';
+        itemTable.insertRow(-1).insertCell(-1).innerHTML = '<div style="width: 100%; text-align: center"><button class="ButtonAddListItem" onClick="AddListItem(\'' + listId + '\')">+</button></div>';
 
         for (var i = 0; i < listItems.length; i++) { //icke raderade
                 var itemName = listItems[i].itemName;
@@ -102,9 +110,9 @@ async function GoToListPage(listId) {
 
             var row = itemTable.insertRow(-1);
             if(!listItems[i].deleted)
-                row.insertCell(-1).innerHTML = '<div class="ItemBox"><button class="XButton" onClick="DeleteListItem(\'' + listItems[i].itemId + '\')"> </button><div class="ItemHeadline">' + itemName + '</div><div class="ItemDescription">' + itemDescription + '</div></div>'
+                row.insertCell(-1).innerHTML = '<div class="ItemBox"><button class="XButton" onClick="DeleteListItem(\'' + listId + '\', \'' + listItems[i].itemId + '\')"> </button><div class="ItemHeadline">' + itemName + '</div><div class="ItemDescription">' + itemDescription + '</div></div>'
             else
-                row.insertCell(-1).innerHTML = '<div class="ItemBox ItemDeleted"><button class="XButton" onClick="DeleteListItem(\'' + listItems[i].itemId + '\')">✓</button><div class="ItemHeadline ItemDeleted">' + itemName + '</div><div class="ItemDescription ItemDeleted">' + itemDescription + '</div></div>'
+                row.insertCell(-1).innerHTML = '<div class="ItemBox ItemDeleted"><button class="XButton"">✓</button><div class="ItemHeadline ItemDeleted">' + itemName + '</div><div class="ItemDescription ItemDeleted">' + itemDescription + '</div></div>'
         }
 
         var container = document.getElementById("ListItemContainer");
