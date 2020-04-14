@@ -49,10 +49,15 @@ async function AddItemToList() {
     var itemHeadline = document.getElementById("ItemHeadlineInput").value;
     var itemDescription = document.getElementById("ItemDescriptionInput").value;
 
+    screen_AddItemPage.style.display = "none";
+    screen_Loading.style.display = "block";
+
     var result = await api.AddListItem(currentList, itemHeadline, itemDescription);
 
-    if (!result.success)
+    if (!result.success) {
         alert(result.message);
+        screen_AddItemPage.style.display = "block";
+    }
 
     GoToListPage(currentList);
 
@@ -118,5 +123,36 @@ async function SetDisplayName() {
 
     if (di.value == "") {
         di.value = document.getElementById("Register_UsernameInput").value;
+    }
+}
+
+async function ShareButton() {
+    HideAllScreens();
+    screen_SharePage.style.display = "block";
+}
+
+async function AddUserCollaborator() {
+    var response = await api.GetUserIdByUserName(document.getElementById("ShareUsernameInput").value);
+
+    if (response.success) {
+        if (!response.message.userId) {
+            alert("No user with that name could be found");
+        }
+        else {
+            var shareResponse = await api.ShareList(currentList, response.message.userId);
+
+            if (shareResponse.success) {
+                alert("User added as a collaborator");
+                document.getElementById("ShareUsernameInput").value = "";
+            }
+            else {
+                alert("Error when adding user as a collaborator, maybe the user already is a collaborator?");
+                console.log("Error when adding collaborator, next log entry will contain information about the error");
+                console.log(shareResponse.message);
+            }
+        }
+    }
+    else {
+        alert(response.message);
     }
 }

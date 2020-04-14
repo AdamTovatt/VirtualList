@@ -86,6 +86,7 @@ class Api {
     }
 
     async Login(emailOrUsername, password) {
+        try {
         var data = null;
 
         if (emailOrUsername.includes("@")) {
@@ -96,12 +97,28 @@ class Api {
         }
 
         var path = "user/token";
-        return JSON.parse(await this.GetResponse("POST", path, data))
+            return JSON.parse(await this.GetResponse("POST", path, data))
+        } catch (e) {
+            return { success: false, message: "Unknown communication error when trying to perform login" };
+        }
     }
 
     async CreateUser(email, username, displayName, password) {
         var path = "user/create";
         var data = { email: email, username: username, displayName: displayName, password: password };
+
+        return JSON.parse(await this.GetResponse("POST", path, data));
+    }
+
+    async GetUserIdByUserName(userName) {
+        var path = "userid/?userName=" + userName;
+
+        return JSON.parse(await this.GetResponse("GET", path));
+    }
+
+    async ShareList(listId, userId) {
+        var path = "list/share";
+        var data = { listId: listId, userId: userId };
 
         return JSON.parse(await this.GetResponse("POST", path, data));
     }

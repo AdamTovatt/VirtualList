@@ -7,6 +7,7 @@ var screen_UserStartPage = null;
 var screen_Loading = null;
 var screen_ListPage = null;
 var screen_AddItemPage = null;
+var screen_SharePage = null;
 
 var currentList = null;
 
@@ -18,6 +19,7 @@ window.onload = async function () {
     screen_Loading = document.getElementById("Screen_Loading");
     screen_ListPage = document.getElementById("Screen_ListPage");
     screen_AddItemPage = document.getElementById("Screen_AddItemPage");
+    screen_SharePage = document.getElementById("Screen_SharePage");
 
     screen_Loading.style.display = "block";
 
@@ -48,6 +50,7 @@ function HideAllScreens(showLoading) {
     screen_UserStartPage.style.display = "none";
     screen_ListPage.style.display = "none";
     screen_AddItemPage.style.display = "none";
+    screen_SharePage.style.display = "none";
 
     if (showLoading) {
         screen_Loading.style.display = "block";
