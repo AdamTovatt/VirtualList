@@ -45,6 +45,39 @@ async function AddListItem(listId) {
     screen_AddItemPage.style.display = "block";
 }
 
+async function RemoveList() {
+    if (confirm('If you are the owner of this list it will be removed. If you are not the owner you will leave the list. Continue?')) {
+        var response = await api.DeleteList(currentList);
+        if (!response.success) {
+            alert("Error removing list");
+        }
+        else {
+            GoToStartPage();
+        }
+    }
+}
+
+async function AddList(listName = "") {
+    if (listName && listName != "") {
+        try {
+            var response = await api.AddList(listName);
+            if (response.success == true) {
+                GoToStartPage();
+            }
+            else {
+                alert("Error, list not added :(");
+            }
+        }
+        catch {
+            alert("Error when adding list");
+        }
+    }
+    else {
+        HideAllScreens();
+        screen_AddList.style.display = "block";
+    }
+}
+
 async function AddItemToList() {
     var itemHeadline = document.getElementById("ItemHeadlineInput").value;
     var itemDescription = document.getElementById("ItemDescriptionInput").value;

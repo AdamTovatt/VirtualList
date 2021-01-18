@@ -149,6 +149,30 @@ body {
         background-color: var(--blue-mid-light);
     }
 
+.ButtonRed {
+    padding: 18px 18px;
+    display: block;
+    border-radius: 36px;
+    font-family: inherit;
+    color: var(--white);
+    border: 0px solid black;
+    background-color: var(--red);
+    font-size: 1.3em;
+    margin-top: 9px;
+    width: 100%;
+    max-width: 20em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .ButtonRed:hover {
+        background-color: var(--red-light);
+    }
+
+    .ButtonRed:active {
+        background-color: var(--red-light);
+    }
+
 .CornerButton {
     position: fixed;
     top: 5px;
@@ -169,6 +193,7 @@ body {
     --white: #f7f7f9;
     --yellow: #f8e9a1;
     --red: #f76c6c;
+    --red-light: #fa8484;
     --blue-light: #a8d0e6;
     --blue-mid: #374785;
     --blue-mid-light: #40539e;

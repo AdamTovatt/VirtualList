@@ -80,6 +80,16 @@ class Api {
         return JSON.parse(await this.GetResponse("DELETE", path));
     }
 
+    async DeleteList(listId) {
+        var path = "list/remove?listId=" + listId;
+        return JSON.parse(await this.GetResponse("DELETE", path));
+    }
+
+    async AddList(listName) {
+        var path = "user/lists";
+        return JSON.parse(await this.GetResponse("POST", path, { listName: listName }));
+    }
+
     async AddListItem(listId, itemName, itemDescription) {
         var path = "listitems";
         return JSON.parse(await this.GetResponse("POST", path, { listId: listId, itemName: itemName, itemDescription: itemDescription }));

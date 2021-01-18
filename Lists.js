@@ -8,6 +8,7 @@ var screen_Loading = null;
 var screen_ListPage = null;
 var screen_AddItemPage = null;
 var screen_SharePage = null;
+var screen_AddList = null;
 
 var currentList = null;
 
@@ -20,6 +21,7 @@ window.onload = async function () {
     screen_ListPage = document.getElementById("Screen_ListPage");
     screen_AddItemPage = document.getElementById("Screen_AddItemPage");
     screen_SharePage = document.getElementById("Screen_SharePage");
+    screen_AddList = document.getElementById("Screen_AddList");
 
     screen_Loading.style.display = "block";
 
@@ -51,6 +53,7 @@ function HideAllScreens(showLoading) {
     screen_ListPage.style.display = "none";
     screen_AddItemPage.style.display = "none";
     screen_SharePage.style.display = "none";
+    screen_AddList.style.display = "none";
 
     if (showLoading) {
         screen_Loading.style.display = "block";
@@ -76,6 +79,9 @@ async function GoToUserPage() {
         var listTable = document.createElement("table");
         listTable.className = "ListTable";
 
+        var cell = listTable.insertRow(-1).insertCell(-1);
+        cell.innerHTML = '<button class="ButtonAddListItem" onclick="AddList()">+</button>';
+        cell.style.textAlign = "center";
         for (var i = 0; i < lists.length; i++) {
             var row = listTable.insertRow(-1);
             row.insertCell(-1).innerHTML = '<button class="Button" onclick="OpenList(\'' + lists[i].listid + '\')">' + lists[i].listname + '</button>'

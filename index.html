@@ -41,7 +41,7 @@
     </div>
     <div class="Screen" id="Screen_ListPage">
         <button class="Button CornerButton" onclick="GoToStartPage()">back</button>
-        <button class="Button CornerButton RightCorner" onclick="ShareButton()">share</button>
+        <button class="Button CornerButton RightCorner" onclick="ShareButton()">options</button>
         <div class="MarginTop" id="ListItemContainer">
         </div>
     </div>
@@ -58,6 +58,14 @@
         <div class="MarginTop" id="ListItemContainer">
             <textarea id="ShareUsernameInput" type="text" class="TextInput" style="text-align:center" placeholder="username to add" spellcheck="false"></textarea>
             <button class="Button" id="SaveItemButton" style="max-width: 18em; margin-top: 1.2em" onclick="AddUserCollaborator()">add collaborator</button>
+        </div>
+        <button class="ButtonRed" id="SaveItemButton" style="max-width: 18em; margin-top: 1.2em" onclick="RemoveList()">remove list</button>
+    </div>
+    <div class="Screen" id="Screen_AddList">
+        <button class="Button CornerButton" onclick="GoToStartPage()">cancel</button>
+        <div class="MarginTop" id="ListItemContainer">
+            <textarea id="AddListInput" type="text" class="TextInput" style="text-align:center" placeholder="new list name" spellcheck="false"></textarea>
+            <button class="Button" id="SaveItemButton" style="max-width: 18em; margin-top: 1.2em" onclick="AddList(document.getElementById('AddListInput').value)">add list</button>
         </div>
     </div>
     <div class="Screen" id="Screen_Loading">
